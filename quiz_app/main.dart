@@ -106,7 +106,6 @@ void runQuiz(List<Question> selectedQuestions) {
     print(q.question);
     double? userAnswer = getUserAnswer();
 
-    // Use a tolerance for floating point answers
     if (userAnswer != null && (userAnswer == q.answer)) {
       print("Correct!\n");
       score++;
@@ -119,20 +118,33 @@ void runQuiz(List<Question> selectedQuestions) {
 }
 
 void main() {
-  print(
-      "Choose a category: Math / General Knowledge / Science / Programming / Geography");
-  stdout.write("Your choice: ");
-  String? categoryChoice = stdin.readLineSync();
-  if (categoryChoice == null || categoryChoice.trim().isEmpty) {
-    print("No category selected. Exiting.");
-    return;
+  while (true) {
+    print(
+        "\nChoose a category: Math / General Knowledge / Science / Programming / Geography");
+    stdout.write("Your choice (or type 'exit' to quit): ");
+    String? categoryChoice = stdin.readLineSync();
+
+    if (categoryChoice == null ||
+        categoryChoice.trim().toLowerCase() == 'exit') {
+      print("Thanks for playing. Goodbye!");
+      break;
+    }
+
+    List<Question> selectedQuestions = questions
+        .where((q) => q.category.toLowerCase() == categoryChoice.toLowerCase())
+        .toList();
+
+    if (selectedQuestions.isEmpty) {
+      print("No questions found for this category.");
+    } else {
+      runQuiz(selectedQuestions);
+    }
+
+    stdout.write("\nDo you want to try again? (yes/no): ");
+    String? again = stdin.readLineSync();
+    if (again == null || again.toLowerCase() != 'yes') {
+      print("Goodbye!");
+      break;
+    }
   }
-  List<Question> selectedQuestions = questions
-      .where((q) => q.category.toLowerCase() == categoryChoice.toLowerCase())
-      .toList();
-  if (selectedQuestions.isEmpty) {
-    print("No questions found for this category.");
-    return;
-  }
-  runQuiz(selectedQuestions);
 }
