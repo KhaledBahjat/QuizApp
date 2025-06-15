@@ -67,4 +67,4 @@ This console app helped me a lot to strengthen the Dart basics before moving to 
 ## 📢 Connect With Me
 
 * GitHub: [@KhaledBahjat](https://github.com/KhaledBahjat)
-* LinkedIn: [linkedin.com/in/your-profile](https://www.linkedin.com/in/your-profile) *(Replace with your actual link)*
+* LinkedIn: [linkedin.com/in/your-profile](https://www.linkedin.com/in/khaled-bahjat-7657a3357) 
